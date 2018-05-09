@@ -13,6 +13,7 @@ exposition for Prometheus. It includes metrics for:
 ## Usage
 
 ### Install Dependancie Management Tool
+
 Install [dep](https://golang.github.io/dep/docs/installation.html)
 
 ### Install Dependant Libraries
@@ -24,11 +25,11 @@ dep ensure -v
 ### Compile Application
 
 ```bash
-go build -o nubis-prometheus-exposition main.go
+make build
 ```
 
 ### Execute Application
 
 ```bash
-aws-vault exec ACCOUNT-ro -- ./nubis-prometheus-exposition --region us-west-2 --out-file ./test.prom
+aws-vault exec ACCOUNT-ro -- ./build/(linux|darwin)/nubis-prometheus-exposition --region us-west-2 --out-file ./test.prom
 ```
