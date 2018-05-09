@@ -30,14 +30,14 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
 	"time"
-	"net/http"
-	"net/url"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -175,13 +175,13 @@ func get_asg_membership(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						//fmt.Println("HTTPS_PROXY not set")
-						return nil, nil
-					} else {
-						//fmt.Printf("HTTPS_PROXY=%s\n", val)
-						return url.Parse(val)
-					}
+				if !ok {
+					//fmt.Println("HTTPS_PROXY not set")
+					return nil, nil
+				} else {
+					//fmt.Printf("HTTPS_PROXY=%s\n", val)
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -193,7 +193,7 @@ func get_asg_membership(region string) {
 
 	// Create AutoScaling service client
 	svc := autoscaling.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
@@ -231,11 +231,11 @@ func get_ec2_instance_tags(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						return nil, nil
-					} else {
-						return url.Parse(val)
-					}
+				if !ok {
+					return nil, nil
+				} else {
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -247,7 +247,7 @@ func get_ec2_instance_tags(region string) {
 
 	// Create EC2 service client
 	svc := ec2.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
@@ -346,11 +346,11 @@ func get_efs_tags(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						return nil, nil
-					} else {
-						return url.Parse(val)
-					}
+				if !ok {
+					return nil, nil
+				} else {
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -362,7 +362,7 @@ func get_efs_tags(region string) {
 
 	// Create EFS service client
 	svc := efs.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
@@ -474,11 +474,11 @@ func get_elb_membership(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						return nil, nil
-					} else {
-						return url.Parse(val)
-					}
+				if !ok {
+					return nil, nil
+				} else {
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -490,7 +490,7 @@ func get_elb_membership(region string) {
 
 	// Create ELB service client
 	svc := elb.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
@@ -526,11 +526,11 @@ func get_lambda_tags(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						return nil, nil
-					} else {
-						return url.Parse(val)
-					}
+				if !ok {
+					return nil, nil
+				} else {
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -542,7 +542,7 @@ func get_lambda_tags(region string) {
 
 	// Create Lambda service client
 	svc := lambda.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
@@ -658,11 +658,11 @@ func get_rds_tags(region string) {
 		Transport: &http.Transport{
 			Proxy: func(*http.Request) (*url.URL, error) {
 				val, ok := os.LookupEnv("HTTPS_PROXY")
-					if !ok {
-						return nil, nil
-					} else {
-						return url.Parse(val)
-					}
+				if !ok {
+					return nil, nil
+				} else {
+					return url.Parse(val)
+				}
 			},
 		},
 	}
@@ -674,7 +674,7 @@ func get_rds_tags(region string) {
 
 	// Create RDS service client
 	svc := rds.New(sess, &aws.Config{
-		Region: aws.String(region),
+		Region:     aws.String(region),
 		HTTPClient: httpclient,
 	})
 
