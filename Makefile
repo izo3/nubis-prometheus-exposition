@@ -2,7 +2,7 @@
 
 NAME=nubis-prometheus-exposition
 GO15VENDOREXPERIMENT := 1
-VERSION=$(shell git describe --always --tags --dirty)
+VERSION=$(shell [ -d .git ] && git describe --always --tags --dirty || echo "Test-build")
 FLAGS=-X main.Version=$(VERSION)
 
 build:
