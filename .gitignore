@@ -1,3 +1,4 @@
 vendor/
-nubis-prometheus-exposition
+build/
+nubis-prometheus-exposition*
 test.prom
