@@ -13,6 +13,7 @@ exposition for Prometheus. It includes metrics for:
 ## Usage
 
 ### Install Dependancie Management Tool
+
 Install [dep](https://golang.github.io/dep/docs/installation.html)
 
 ### Install Dependant Libraries
