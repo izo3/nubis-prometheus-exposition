@@ -36,6 +36,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"net/http"
+	"net/url"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -168,6 +170,22 @@ func write_file(outFile string, fileContents string) {
 
 // Lists all instances in an ASG in us-west-2
 func get_asg_membership(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						//fmt.Println("HTTPS_PROXY not set")
+						return nil, nil
+					} else {
+						//fmt.Printf("HTTPS_PROXY=%s\n", val)
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
@@ -176,6 +194,7 @@ func get_asg_membership(region string) {
 	// Create AutoScaling service client
 	svc := autoscaling.New(sess, &aws.Config{
 		Region: aws.String(region),
+		HTTPClient: httpclient,
 	})
 
 	result, err := svc.DescribeAutoScalingGroups(nil)
@@ -207,13 +226,30 @@ func get_asg_membership(region string) {
 // Create new guage with keys from map
 // Iterate through instances making one guage metric each with all key:value pairs populated
 func get_ec2_instance_tags(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						return nil, nil
+					} else {
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	// Create EC2 service client
-	svc := ec2.New(sess, &aws.Config{Region: aws.String(region)})
+	svc := ec2.New(sess, &aws.Config{
+		Region: aws.String(region),
+		HTTPClient: httpclient,
+	})
 
 	result, err := svc.DescribeInstances(nil)
 	if err != nil {
@@ -305,13 +341,30 @@ func get_ec2_instance_tags(region string) {
 
 // Lists all EFS tags in us-west-2
 func get_efs_tags(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						return nil, nil
+					} else {
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	// Create EFS service client
-	svc := efs.New(sess, &aws.Config{Region: aws.String(region)})
+	svc := efs.New(sess, &aws.Config{
+		Region: aws.String(region),
+		HTTPClient: httpclient,
+	})
 
 	result, err := svc.DescribeFileSystems(nil)
 	if err != nil {
@@ -416,13 +469,30 @@ func get_efs_tags(region string) {
 
 // Lists all instances in an elb in us-west-2
 func get_elb_membership(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						return nil, nil
+					} else {
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	// Create ELB service client
-	svc := elb.New(sess, &aws.Config{Region: aws.String(region)})
+	svc := elb.New(sess, &aws.Config{
+		Region: aws.String(region),
+		HTTPClient: httpclient,
+	})
 
 	result, err := svc.DescribeLoadBalancers(nil)
 
@@ -451,13 +521,30 @@ func get_elb_membership(region string) {
 
 // Lists all Lambda functions in us-west-2
 func get_lambda_tags(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						return nil, nil
+					} else {
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	// Create Lambda service client
-	svc := lambda.New(sess, &aws.Config{Region: aws.String(region)})
+	svc := lambda.New(sess, &aws.Config{
+		Region: aws.String(region),
+		HTTPClient: httpclient,
+	})
 
 	result, err := svc.ListFunctions(nil)
 	if err != nil {
@@ -566,13 +653,30 @@ func get_lambda_tags(region string) {
 
 // Lists all RDS tags in us-west-2
 func get_rds_tags(region string) {
+	// Set up for a proxy, if one exists
+	httpclient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: func(*http.Request) (*url.URL, error) {
+				val, ok := os.LookupEnv("HTTPS_PROXY")
+					if !ok {
+						return nil, nil
+					} else {
+						return url.Parse(val)
+					}
+			},
+		},
+	}
+
 	// Initialize a session
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
 	// Create RDS service client
-	svc := rds.New(sess, &aws.Config{Region: aws.String(region)})
+	svc := rds.New(sess, &aws.Config{
+		Region: aws.String(region),
+		HTTPClient: httpclient,
+	})
 
 	result, err := svc.DescribeDBInstances(nil)
 	if err != nil {
