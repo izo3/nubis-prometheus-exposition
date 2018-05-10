@@ -3,12 +3,12 @@
 This is a small go tool which queries the AWS api and writes a text-based
 exposition for Prometheus. It includes metrics for:
 
-- ASG Instances
-- EC2 Instances Tags
-- EFS Tags
-- ELB Instances
-- Lambda Tags
-- RDS Tags
+- ASG Instances (aws_asg_instances)
+- EC2 Instances Tags (aws_ec2_tags)
+- EFS Tags (aws_efs_tags)
+- ELB Instances (aws_elb_instances)
+- Lambda Tags (aws_lambda_tags)
+- RDS Tags (aws_rds_tags)
 
 ## Usage
 
