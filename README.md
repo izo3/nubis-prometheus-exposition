@@ -33,3 +33,27 @@ make build
 ```bash
 aws-vault exec ACCOUNT-ro -- ./build/(linux|darwin)/nubis-prometheus-exposition --region us-west-2 --out-file ./test.prom
 ```
+
+## AWS IAM Role Policy
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ExpositionReadOnly",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances"
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "lambda:ListFunctions",
+                "lambda:ListTags",
+                "autoscaling:DescribeAutoScalingGroups",
+                "rds:DescribeDBInstances",
+                "elasticfilesystem:DescribeFileSystems"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
