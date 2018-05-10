@@ -1,10 +1,23 @@
 # Change Log
 
-## [v0.1.0](https://github.com/nubisproject/nubis-prometheus-exposition/tree/v0.1.0) (2018-05-09)
-[Full Changelog](https://github.com/nubisproject/nubis-prometheus-exposition/compare/v0.0.1...v0.1.0)
+## [v0.2.0](https://github.com/nubisproject/nubis-prometheus-exposition/tree/v0.2.0) (2018-05-10)
+[Full Changelog](https://github.com/nubisproject/nubis-prometheus-exposition/compare/v0.1.0...v0.2.0)
 
 **Merged pull requests:**
 
+- Add proxy detection for running behind a proxy [\#9](https://github.com/nubisproject/nubis-prometheus-exposition/pull/9) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v0.1.0](https://github.com/nubisproject/nubis-prometheus-exposition/tree/v0.1.0) (2018-05-09)
+[Full Changelog](https://github.com/nubisproject/nubis-prometheus-exposition/compare/v0.0.1...v0.1.0)
+
+**Closed issues:**
+
+- Tag v0.1.0 release [\#6](https://github.com/nubisproject/nubis-prometheus-exposition/issues/6)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v0.1.0 release \[skip ci\] [\#8](https://github.com/nubisproject/nubis-prometheus-exposition/pull/8) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v0.1.0 release \[skip ci\] [\#7](https://github.com/nubisproject/nubis-prometheus-exposition/pull/7) ([nubis-automation](https://github.com/nubis-automation))
 - Add .travis.yml and fix lint checks [\#5](https://github.com/nubisproject/nubis-prometheus-exposition/pull/5) ([tinnightcap](https://github.com/tinnightcap))
 - Use make for builds [\#4](https://github.com/nubisproject/nubis-prometheus-exposition/pull/4) ([tinnightcap](https://github.com/tinnightcap))
 
